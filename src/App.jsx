@@ -5,7 +5,7 @@ function App() {
     return (
         <>
             <header>
-                <h1>Vite + React</h1>
+                <h1>Next Bank Holiday</h1>
             </header>
 
             <main>
