@@ -1,8 +1,8 @@
 function Country(props) {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
-    const tabs = countries.map(c => (
-        <li>{c}</li>
+    const tabs = countries.map((c, i) => (
+        <li key={i}>{c}</li>
     ))
 
     return (
