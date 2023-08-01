@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import Country from './Country'
 
 function App() {
     return (
@@ -9,7 +10,7 @@ function App() {
             </header>
 
             <main>
-                <h2>body</h2>
+                <Country country="England and Wales" bankHolDate="28 August" bankHolName="Summer bank holiday" />
             </main>
 
             <footer>
