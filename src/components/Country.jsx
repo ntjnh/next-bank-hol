@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import BankHol from "./BankHol"
 
 function Country() {
@@ -6,11 +6,40 @@ function Country() {
     scot = 'Scotland',
     nire = 'Northern Ireland'
 
+    // Grab dates from API
+    const [bankHols, setBankHols] = useState({})
+
+    useEffect(() => {
+        fetch('https://www.gov.uk/bank-holidays.json')
+            .then(res => res.json())
+            .then(data => {
+                setBankHols({
+                    englandWales: data['england-and-wales'],
+                    scotland: data['scotland'],
+                    northernIreland: bankHols['northern-ireland']
+                })
+            })
+    }, [])
+
+    function filterEvents(eventsArr) {
+        return eventsArr.filter(hol => {
+            const holDate = hol.date
+            return holDate.startsWith('2023')
+        })
+    }
+
+    // Country Selection
     const [selectedCountry, setSelectedCountry] = useState('England and Wales')
 
     function tabClick(e) {
-        setSelectedCountry(e.target.dataset.country)
-    }
+        let currentCountry = e.target.dataset.country
+        setSelectedCountry(currentCountry)
+
+        // this currently only works with Scotland
+        currentCountry = currentCountry.toLowerCase()
+
+        // console.log(filterEvents(bankHols[currentCountry].events))
+    } 
 
     return (
         <article>

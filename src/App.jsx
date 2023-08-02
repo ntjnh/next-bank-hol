@@ -1,8 +1,10 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import Country from './Country'
+import Country from './components/Country'
 
 function App() {
+    
+
     return (
         <>
             <header>
@@ -10,11 +12,12 @@ function App() {
             </header>
 
             <main>
-                <Country country="England and Wales" bankHolDate="28 August" bankHolName="Summer bank holiday" />
+                <Country />
+
             </main>
 
             <footer>
-                <a href="https://natejonah.com" target="_blank">Nate</a> built this.
+                <a href="https://natejonah.com" target="_blank" rel="noreferrer">Nate</a> built this.
             </footer>
         </>
     )
