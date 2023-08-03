@@ -21,16 +21,7 @@ function Country() {
             })
     }, [])
 
-    // const today = new Date()
-    // const month = today.getMonth()
-    // const year = today.getFullYear()
-
-    // console.log(`${month + 1} ${year}`)
-
     function filterEvents(eventsArr) {
-
-        console.log(`Starting date amount: ${eventsArr.length}`)
-        let count = 0
         const filtered = eventsArr.map(hol => {
             hol['date'] = hol['date'].split('-').map(d => parseInt(d))
 
@@ -39,22 +30,12 @@ function Country() {
             const holDate = hol['date']
 
             const today = new Date()
+            const day = today.getDate() + 1
             const month = today.getMonth() + 1
             const year = today.getFullYear()
 
-            
-            if ((holDate[0] >= year) && (holDate[1] >= month)) {
-                console.log(`Current month is ${month} and hol month is ${holDate[1]}`)
-                console.log(`${count}: ${holDate}`)
-                count++
-            }
-
-            // only filter out months if year is 2023
-
-            return (holDate[0] >= year) && (holDate[1] >= month)
+            return (holDate[0] > year) || ((holDate[0] === year) && (holDate[1] >= month) && (holDate[2] >= day))
         })
-        
-        console.log(`Final date amount should be: 19`)
         
         return filtered
     }
