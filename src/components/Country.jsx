@@ -14,9 +14,9 @@ function Country() {
             .then(res => res.json())
             .then(data => {
                 setBankHols({
-                    englandWales: data['england-and-wales'],
-                    scotland: data['scotland'],
-                    northernIreland: bankHols['northern-ireland']
+                    'england-and-wales': data['england-and-wales'],
+                    'scotland': data['scotland'],
+                    'northern-ireland': data['northern-ireland']
                 })
             })
     }, [])
@@ -35,10 +35,10 @@ function Country() {
         let currentCountry = e.target.dataset.country
         setSelectedCountry(currentCountry)
 
-        // this currently only works with Scotland
-        currentCountry = currentCountry.toLowerCase()
+        currentCountry = currentCountry.toLowerCase().replace(/\s/g, '-')
 
-        // console.log(filterEvents(bankHols[currentCountry].events))
+        console.log(currentCountry)
+        console.log(filterEvents(bankHols[currentCountry]['events']))
     } 
 
     return (
