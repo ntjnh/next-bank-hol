@@ -23,6 +23,7 @@ function Country() {
 
     function filterEvents(eventsArr) {
         const filtered = eventsArr.map(hol => {
+            console.log(hol['date'])
             hol['date'] = hol['date'].split('-').map(d => parseInt(d))
 
             return hol
@@ -41,16 +42,28 @@ function Country() {
     }
 
     // Country Selection
-    const [selectedCountry, setSelectedCountry] = useState('England and Wales')
+    const [selectedCountry, setSelectedCountry] = useState({
+        name: 'England and Wales',
+        title: 'Bank Hol',
+        date: '7 June'
+    })
 
     function tabClick(e) {
         let currentCountry = e.target.dataset.country
-        setSelectedCountry(currentCountry)
-
         currentCountry = currentCountry.toLowerCase().replace(/\s/g, '-')
 
-        console.log(currentCountry)
-        console.log(filterEvents(bankHols[currentCountry]['events']))
+        const events = bankHols[currentCountry]['events']
+
+        // setSelectedCountry({
+        //     full: currentCountry,
+        //     name: filterEvents(events)[0].title,
+        //     date: filterEvents(events)[0].date
+        // })
+
+        
+
+        // console.log(currentCountry)
+        // console.log(filterEvents(bankHols[currentCountry]['events'])[0].title)
     }
 
     return (
@@ -61,7 +74,7 @@ function Country() {
                 <li data-country={nire} onClick={tabClick}>{nire}</li>
             </ul>
 
-            <BankHol country={selectedCountry} bankHolDate={7} bankHolName={9} />
+            <BankHol country={selectedCountry.full} bankHolDate={selectedCountry.date} bankHolName={selectedCountry.name} />
         </article>
     )
 }
