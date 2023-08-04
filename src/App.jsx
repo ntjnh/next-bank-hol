@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import Country from './components/Country'
 
 function App() {
-    
-
     return (
         <>
             <header>
@@ -13,11 +10,10 @@ function App() {
 
             <main>
                 <Country />
-
             </main>
 
             <footer>
-                <a href="https://natejonah.com" target="_blank" rel="noreferrer">Nate</a> built this.
+                <a href="https://natejonah.com?utm_source=codebynate&utm_medium=web&utm_campaign=next_bank_hol" target="_blank" rel="noreferrer">Nate</a> built this.
             </footer>
         </>
     )
