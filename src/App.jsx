@@ -1,4 +1,3 @@
-import './App.css'
 import Country from './components/Country'
 
 function App() {
