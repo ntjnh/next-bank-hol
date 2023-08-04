@@ -23,21 +23,30 @@ function Country() {
 
     function filterEvents(eventsArr) {
         const filtered = eventsArr.map(hol => {
-            console.log(hol['date'])
-            hol['date'] = hol['date'].split('-').map(d => parseInt(d))
+            // let holDate = hol.date
+            // holDate = holDate.split('-').map(d => parseInt(d))
+
+
+            hol.date = new Date(hol.date)
+
 
             return hol
         }).filter(hol => {
-            const holDate = hol['date']
+            const holDate = hol.date
+            const holDay = holDate.getDate()
+            const holMonth = holDate.getMonth() + 1
+            const holYear = holDate.getFullYear()
+
+            // console.log(`${holYear} ${holMonth} ${holDay}`)
 
             const today = new Date()
-            const day = today.getDate() + 1
+            const day = today.getDate()
             const month = today.getMonth() + 1
             const year = today.getFullYear()
 
-            return (holDate[0] > year) || ((holDate[0] === year) && (holDate[1] >= month) && (holDate[2] >= day))
+            return (holYear > year) || ((holYear === year) && (holMonth >= month) && (holDay >= day))
         })
-        
+
         return filtered
     }
 
@@ -49,16 +58,18 @@ function Country() {
     })
 
     function tabClick(e) {
-        let currentCountry = e.target.dataset.country
-        currentCountry = currentCountry.toLowerCase().replace(/\s/g, '-')
+        let clickedCountry = e.target.dataset.country
+        const currentCountry = clickedCountry.toLowerCase().replace(/\s/g, '-')
 
-        const events = bankHols[currentCountry]['events']
+        const allDates = bankHols[currentCountry].events
+        const nextBankHol = filterEvents(allDates)
+        console.log(nextBankHol[0].date)
 
-        // setSelectedCountry({
-        //     full: currentCountry,
-        //     name: filterEvents(events)[0].title,
-        //     date: filterEvents(events)[0].date
-        // })
+        setSelectedCountry({
+            full: clickedCountry,
+            name: nextBankHol.title,
+            date: nextBankHol.date
+        })
 
         
 
