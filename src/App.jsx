@@ -7,7 +7,7 @@ function App() {
                 <h1 className='font-semibold text-3xl text-zinc-100'>Next Bank Holiday</h1>
             </header>
 
-            <main className='flex-1 px-6 py-8 self-stretch w-full'>
+            <main className='flex-1 px-4 py-8 self-stretch w-full'>
                 <Country />
             </main>
 
