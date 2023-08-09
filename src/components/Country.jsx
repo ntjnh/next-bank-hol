@@ -6,6 +6,7 @@ import monthToString from '../functions/monthToString'
 function Country() {
     // Create state for bank hol data
     const [bankHols, setBankHols] = useState({})
+    const [selectedCountry, setSelectedCountry] = useState({})
     
     // Grab dates from API
     useEffect(() => {
@@ -17,15 +18,19 @@ function Country() {
                     'scotland': data['scotland'],
                     'northern-ireland': data['northern-ireland']
                 })
+
+                const engWalesNextEvent = filterEvents(data['england-and-wales'].events)[0]
+                const engWalesNextEventDate = engWalesNextEvent.date
+            
+                // Create state for the current country
+                setSelectedCountry({
+                    full: 'England and Wales',
+                    name: engWalesNextEvent.title,
+                    date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`
+                })
             })
     }, [])
 
-    // Create state for the current country
-    const [selectedCountry, setSelectedCountry] = useState({
-        full: 'England and Wales',
-        name: 'Christmas Day',
-        date: '25 December'
-    })
 
     function getNextBankHol(country) {
         // Set England and Wales as the default
