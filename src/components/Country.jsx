@@ -7,6 +7,8 @@ function Country() {
     // Create state for bank hol data
     const [bankHols, setBankHols] = useState({})
     const [selectedCountry, setSelectedCountry] = useState({})
+    const [isActive, setIsActive] = useState(false)
+    const [selectedTab, setSelectedTab] = useState(null)
     
     // Grab dates from API
     useEffect(() => {
@@ -26,7 +28,8 @@ function Country() {
                 setSelectedCountry({
                     full: 'England and Wales',
                     name: engWalesNextEvent.title,
-                    date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`
+                    date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`,
+                    activeDefault: true
                 })
             })
     }, [])
@@ -47,12 +50,10 @@ function Country() {
         setSelectedCountry({
             full: country,
             name: nextBankHol.title,
-            date: `${nextBankHolDate.getDate()} ${monthToString(nextBankHolDate)}`
+            date: `${nextBankHolDate.getDate()} ${monthToString(nextBankHolDate)}`,
+            activeDefault: false
         })
     }    
-
-    const [isActive, setIsActive] = useState(false)
-    const [selectedTab, setSelectedTab] = useState(null)
 
     function toggleClasses(selectedTabId) {
         setIsActive(selectedTab === selectedTabId)
@@ -64,7 +65,7 @@ function Country() {
     
     const genericTabClasses = 'justify-self-center text-gray-400 stroke-slate-700 focus:stroke-sky-600 focus:text-sky-600 hover:stroke-sky-600'
 
-    const tabClasses = `${allTabClasses} ${isActive ? activeTabClasses : genericTabClasses}`
+    const tabClasses = `${allTabClasses} ${(isActive) ? activeTabClasses : genericTabClasses}`
 
     // Update data each time a tab is clicked depending on which country is active
     function tabClick(e) {
@@ -84,7 +85,7 @@ function Country() {
     const countryNames = ['England and Wales', 'Scotland', 'Northern Ireland'].map((countryName, i) => {
         return (
             <li key={i} className='w-1/3' data-country={countryName} role='presentation' onClick={tabClick}>
-                <button className={tabClasses} id={`tab-${i}`} role='tab' aria-setsize='3' aria-posinset={i+1} tabIndex={isActive ? '0' : '-1'} aria-controls={`tab-panel-${i+1}`} aria-selected={isActive ? 'true' : 'false'}>{countryName}</button>
+                <button className={(i == 0 && selectedCountry.activeDefault) ? `${allTabClasses} ${activeTabClasses}` : tabClasses} id={`tab-${i}`} role='tab' aria-setsize='3' aria-posinset={i+1} tabIndex={isActive ? '0' : '-1'} aria-controls={`tab-panel-${i+1}`} aria-selected={isActive ? 'true' : 'false'}>{countryName}</button>
             </li>
         )
     })
