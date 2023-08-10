@@ -60,10 +60,8 @@ function Country() {
     }
 
     const allTabClasses = 'inline-flex items-center justify-center w-full h-14 gap-2 px-4 -mb-px text-gray-400 text-sm font-medium tracking-wide transition duration-300 focus-visible:outline-none disabled:cursor-not-allowed'
-
-    const activeTabClasses = 'border-b border-sky-700 text-sky-700 focus:text-sky-700 stroke-sky-500 hover:stroke-sky-600 focus:stroke-sky-700'
-    
-    const genericTabClasses = 'justify-self-center text-gray-400 stroke-slate-700 focus:stroke-sky-600 focus:text-sky-600 hover:stroke-sky-600'
+    const activeTabClasses = 'text-sky-700 focus:text-sky-700 stroke-sky-500 hover:stroke-sky-600 focus:stroke-sky-700'
+    const genericTabClasses = 'justify-self-center text-gray-600 stroke-slate-700 focus:stroke-sky-600 focus:text-sky-600 hover:stroke-sky-600'
 
     const tabClasses = `${allTabClasses} ${(isActive) ? activeTabClasses : genericTabClasses}`
 
