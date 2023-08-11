@@ -90,7 +90,7 @@ function Country() {
 
     return (
         <section className='max-w-full'>
-            <ul className='flex items-center border-b border-zinc-700/70 mb-8' role='tablist'>
+            <ul className='flex items-center border-b border-zinc-700/70 max-w-screen-sm mb-8 mx-auto' role='tablist'>
                 {countryNames}
             </ul>
 
