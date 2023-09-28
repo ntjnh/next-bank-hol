@@ -14,7 +14,13 @@ const filterEvents = eventsArr => {
         const month = today.getMonth() + 1
         const year = today.getFullYear()
 
-        return (holYear > year) || ((holYear === year) && (holMonth >= month) && (holDay >= day))
+        // If next year onwards OR if current year and next month onwards
+        if ((holYear > year) || (holYear === year && holMonth > month)) {
+            return hol
+        // If current year and current month and tomorrow onwards
+        } else if (holYear === year && holMonth === month && holDay > day) {
+            return hol
+        }
     })
 
     return filtered
