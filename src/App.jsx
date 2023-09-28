@@ -12,7 +12,7 @@ function App() {
             </main>
 
             <footer className='border-t border-zinc-700/70 px-6 py-4 self-end text-center text-xs text-zinc-600 w-full'>
-                <a className='text-sky-700 hover:text-sky-800' href='https://natejonah.com?utm_source=codebynate&utm_medium=web&utm_campaign=next_bank_hol' target='_blank' rel='noreferrer'>Nate</a> built this.
+                <a className='text-sky-800 underline hover:text-zinc-900' href='https://natejonah.com?utm_source=codebynate&utm_medium=web&utm_campaign=next_bank_hol' target='_blank' rel='noreferrer'>Nate</a> built this.
             </footer>
         </div>
     )
