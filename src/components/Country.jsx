@@ -68,18 +68,23 @@ function Country() {
     // Full country names for display on front end
     const countryNames = countries.map((countryName, i) => {
         let countryNameLowerC = countryName.toLowerCase().replace(/\s/g, '-')
+
         return (
-            <li key={i} className='w-1/3' data-country={countryName} role='presentation'>
+            <li 
+                key={i} 
+                className="w-1/3" 
+                data-country={countryName} 
+                role="presentation">
                 <button 
                     onClick={() => handleClick(countryName)} 
                     className={activeTab === countryName ? activeTabClasses : genericTabClasses} 
                     id={`tab-${countryNameLowerC}`} 
-                    role='tab' 
-                    aria-setsize='3' 
+                    role="tab" 
+                    aria-setsize="3" 
                     aria-posinset={i+1} 
-                    tabIndex={activeTab === countryName ? '0' : '-1'} 
+                    tabIndex={activeTab === countryName ? `0` : `-1`} 
                     aria-controls={countryNameLowerC} 
-                    aria-selected={activeTab === countryName ? 'true' : 'false'}
+                    aria-selected={activeTab === countryName ? `true` : `false`}
                 >
                     {countryName}
                 </button>
@@ -88,8 +93,11 @@ function Country() {
     })
 
     return (
-        <article className='max-w-full'>
-            <ul className='flex items-center border-b border-zinc-700/70 max-w-screen-sm mb-8 mx-auto' role='tablist'>
+        <article className="max-w-full">
+            <ul 
+                className="flex items-center border-b border-zinc-700/70 max-w-screen-sm mb-8 mx-auto" 
+                role='tablist'
+            >
                 {countryNames}
             </ul>
 
