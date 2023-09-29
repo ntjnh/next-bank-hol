@@ -7,8 +7,9 @@ function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
     const [bankHols, setBankHols] = useState({})
-    const [selectedCountry, setSelectedCountry] = useState({})
-
+    const [selectedCountry, setSelectedCountry] = useState({
+        full: 'England and Wales'
+    })
     const [activeTab, setActiveTab] = useState(countries[0])
     
     // Grab dates from API
@@ -27,14 +28,13 @@ function Country() {
             
                 // Create state for the current country and set England and Wales as the default
                 setSelectedCountry({
-                    full: 'England and Wales',
+                    ...selectedCountry,
                     name: engWalesNextEvent.title,
                     date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`,
                     activeDefault: true
                 })
             })
     }, [])
-
 
     function getNextBankHol(country) {
         const currentCountry = country.toLowerCase().replace(/\s/g, '-')
@@ -67,22 +67,39 @@ function Country() {
 
     // Full country names for display on front end
     const countryNames = countries.map((countryName, i) => {
+        let countryNameLowerC = countryName.toLowerCase().replace(/\s/g, '-')
         return (
             <li key={i} className='w-1/3' data-country={countryName} role='presentation'>
-                <button onClick={() => handleClick(countryName)} className={activeTab === countryName ? activeTabClasses : genericTabClasses} id={`tab-${i}`} role='tab' aria-setsize='3' aria-posinset={i+1} tabIndex={activeTab === countryName ? '0' : '-1'} aria-controls={`tab-panel-${i+1}`} aria-selected={activeTab === countryName ? 'true' : 'false'}>{countryName}</button>
+                <button 
+                    onClick={() => handleClick(countryName)} 
+                    className={activeTab === countryName ? activeTabClasses : genericTabClasses} 
+                    id={`tab-${countryNameLowerC}`} 
+                    role='tab' 
+                    aria-setsize='3' 
+                    aria-posinset={i+1} 
+                    tabIndex={activeTab === countryName ? '0' : '-1'} 
+                    aria-controls={countryNameLowerC} 
+                    aria-selected={activeTab === countryName ? 'true' : 'false'}
+                >
+                    {countryName}
+                </button>
             </li>
         )
     })
 
     return (
-        <section className='max-w-full'>
+        <article className='max-w-full'>
             <ul className='flex items-center border-b border-zinc-700/70 max-w-screen-sm mb-8 mx-auto' role='tablist'>
                 {countryNames}
             </ul>
 
             {/* Pass next holiday data to the BankHol component to be displayed in DOM */}
-            <BankHol country={selectedCountry.full} bankHolDate={selectedCountry.date} bankHolName={selectedCountry.name} />
-        </section>
+            <BankHol 
+                country={selectedCountry.full} 
+                bankHolDate={selectedCountry.date} 
+                bankHolName={selectedCountry.name} 
+            />
+        </article>
     )
 }
 
