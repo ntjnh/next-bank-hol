@@ -11,11 +11,16 @@ Just a simple React app that tells you when the next bank holiday is in the Engl
 - Styling: [Tailwind CSS](https://tailwindcss.com/)
 - Deploys: [Netlify](https://www.netlify.com/)
 
-## Lighthouse
+## Lighthouse Report
 
 ### Initial results
 - Performance (95)
 - Accessibility (90)
     - Active tab button - `[aria-*] attributes do not have valid values`
     - Attribution link in footer - `Links rely on color to be distinguishable.`
+- Best Practices (100)
+
+### Final results
+- Performance (98)
+- Accessibility (100)
 - Best Practices (100)
