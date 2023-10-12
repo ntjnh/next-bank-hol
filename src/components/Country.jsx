@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import BankHol from './BankHol'
+import Upcoming from './Upcoming'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
+import splitUpcoming from '../functions/splitUpcoming'
 
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
@@ -22,8 +24,9 @@ function Country() {
                     'scotland': data['scotland'],
                     'northern-ireland': data['northern-ireland']
                 })
-
-                const engWalesNextEvent = filterEvents(data['england-and-wales'].events)[0]
+                
+                const engWalesUpcoming = filterEvents(data['england-and-wales'].events)
+                const engWalesNextEvent = engWalesUpcoming[0]
                 const engWalesNextEventDate = engWalesNextEvent.date
             
                 // Create state for the current country and set England and Wales as the default
@@ -31,6 +34,7 @@ function Country() {
                     ...selectedCountry,
                     name: engWalesNextEvent.title,
                     date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`,
+                    upcomingHols: splitUpcoming(engWalesUpcoming),
                     activeDefault: true
                 })
             })
@@ -51,6 +55,7 @@ function Country() {
             full: country,
             name: nextBankHol.title,
             date: `${nextBankHolDate.getDate()} ${monthToString(nextBankHolDate)}`,
+            upcomingHols: splitUpcoming(filterEvents(allDates)),
             activeDefault: false
         })
     }
@@ -106,6 +111,11 @@ function Country() {
                 country={selectedCountry.full} 
                 bankHolDate={selectedCountry.date} 
                 bankHolName={selectedCountry.name} 
+            />
+
+            <Upcoming
+                country={selectedCountry.full}
+                upcoming={selectedCountry.upcomingHols}
             />
         </article>
     )
