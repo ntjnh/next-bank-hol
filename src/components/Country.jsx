@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import BankHol from './BankHol'
+import groupByYear from '../functions/groupByYear'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
+import List from './List'
 
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
     const [bankHols, setBankHols] = useState({})
     const [selectedCountry, setSelectedCountry] = useState({
-        full: 'England and Wales'
+        full: 'England and Wales',
+        upcoming: []
     })
     const [activeTab, setActiveTab] = useState(countries[0])
     
@@ -31,6 +34,7 @@ function Country() {
                     ...selectedCountry,
                     name: engWalesNextEvent.title,
                     date: `${engWalesNextEventDate.getDate()} ${monthToString(engWalesNextEventDate)}`,
+                    upcoming: groupByYear(filterEvents(data['england-and-wales'].events, 'upcoming')),
                     activeDefault: true
                 })
             })
@@ -42,6 +46,7 @@ function Country() {
         // Get dates for the country and filter them
         const allDates = bankHols[currentCountry].events
         const nextBankHol = filterEvents(allDates, 'next')
+        const upcomingDates = groupByYear(filterEvents(allDates, 'upcoming'))
 
         // Get next holiday date
         const nextBankHolDate = nextBankHol.date
@@ -51,6 +56,7 @@ function Country() {
             full: country,
             name: nextBankHol.title,
             date: `${nextBankHolDate.getDate()} ${monthToString(nextBankHolDate)}`,
+            upcoming: upcomingDates,
             activeDefault: false
         })
     }
@@ -106,6 +112,11 @@ function Country() {
                 country={selectedCountry.full} 
                 bankHolDate={selectedCountry.date} 
                 bankHolName={selectedCountry.name} 
+            />
+
+            <List
+                country={selectedCountry.full}
+                dates={selectedCountry.upcoming}
             />
         </article>
     )
