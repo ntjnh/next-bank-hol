@@ -23,7 +23,7 @@ function Country() {
                     'northern-ireland': data['northern-ireland']
                 })
 
-                const engWalesNextEvent = filterEvents(data['england-and-wales'].events)[0]
+                const engWalesNextEvent = filterEvents(data['england-and-wales'].events, 'next')
                 const engWalesNextEventDate = engWalesNextEvent.date
             
                 // Create state for the current country and set England and Wales as the default
@@ -41,7 +41,7 @@ function Country() {
 
         // Get dates for the country and filter them
         const allDates = bankHols[currentCountry].events
-        const nextBankHol = filterEvents(allDates)[0]
+        const nextBankHol = filterEvents(allDates, 'next')
 
         // Get next holiday date
         const nextBankHolDate = nextBankHol.date
@@ -95,8 +95,8 @@ function Country() {
     return (
         <article className="max-w-full">
             <ul 
-                className="flex items-center border-b border-zinc-700/70 max-w-screen-sm mb-8 mx-auto" 
-                role='tablist'
+                className="flex items-center border-b border-sky-700 max-w-screen-sm mb-8 mx-auto" 
+                role="tablist"
             >
                 {countryNames}
             </ul>
