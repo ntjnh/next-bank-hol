@@ -2,7 +2,7 @@ export default function BankHol(props) {
     const countryLowerC = props['country'].toLowerCase().replace(/\s/g, '-')
 
     return (
-        <div className="container px-6 md:px-0 mx-auto">
+        <div className="container px-5 md:px-0 mx-auto">
             <section 
                 id={countryLowerC} 
                 role="tabpanel"

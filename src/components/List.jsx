@@ -2,7 +2,7 @@ import Table from './Table'
 
 export default function List({ country, dates }) {
     return (
-        <div className="max-w-screen-sm mx-auto py-7">
+        <div className="max-w-screen-sm mx-auto px-5 md:px-0 py-7">
             <h2 className="font-bold mb-5 text-xl">
                 Upcoming bank holidays in {country}
             </h2>
