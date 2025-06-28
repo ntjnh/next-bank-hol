@@ -3,3 +3,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .table {
+        @apply mb-9 w-full;
+
+        caption,
+        th,
+        td {
+            @apply text-left;
+        }
+
+        tbody th,
+        td {
+            @apply border-b border-t border-zinc-500;
+        }
+
+        th, td {
+            @apply leading-5 pr-5 py-2.5;
+        }
+
+        caption {
+            @apply font-bold mb-4 text-lg;
+        }
+    }
+}

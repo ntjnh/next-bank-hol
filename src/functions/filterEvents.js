@@ -1,29 +1,30 @@
 // Function to filter out past bank holidays
-const filterEvents = eventsArr => {
-    const filtered = eventsArr.map(hol => {
+export default function filterEvents(eventsArr, when) {
+    let result
+    const today = new Date()
+
+    const holidays = eventsArr.map(hol => {
         hol.date = new Date(hol.date)
         return hol
-    }).filter(hol => {
-        const holDate = hol.date
-        const holDay = holDate.getDate()
-        const holMonth = holDate.getMonth() + 1
-        const holYear = holDate.getFullYear()
-
-        const today = new Date()
-        const day = today.getDate()
-        const month = today.getMonth() + 1
-        const year = today.getFullYear()
-
-        // If next year onwards OR if current year and next month onwards
-        if ((holYear > year) || (holYear === year && holMonth > month)) {
-            return hol
-        // If current year and current month and tomorrow onwards
-        } else if (holYear === year && holMonth === month && holDay > day) {
-            return hol
-        }
     })
 
-    return filtered
-}
+    const pastHolidays = holidays.filter(hol => hol.date <= today)
+    const futureHolidays = holidays.filter(hol => hol.date >= today)
 
-export default filterEvents
+    switch(when) {
+        case 'next':
+            result = futureHolidays[0]
+            break
+        case 'upcoming':
+            result = futureHolidays
+            break
+        case 'past':
+            result = pastHolidays
+            break
+        default:
+            result = holidays
+            break
+    }
+    
+    return result
+}
