@@ -32,7 +32,7 @@ export default function Table({ holidays, year }) {
                             {dayToString(holiday.date)}
                         </td>
                         <td className="table__cell">
-                            {holiday.title}
+                            {holiday.title} {holiday.notes ? `(${holiday.notes.toLowerCase()})` : ''}
                         </td>
                     </tr>
                 ))}
