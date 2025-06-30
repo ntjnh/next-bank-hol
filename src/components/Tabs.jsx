@@ -1,4 +1,4 @@
-import getHolidays from '../functions/ getHolidays'
+import getHolidays from '../functions/getHolidays'
 
 export default function Tabs({
     activeTab,
