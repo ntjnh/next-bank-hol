@@ -1,4 +1,4 @@
-# Next UK Bank Holiday
+# UK Bank Holidays
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e7bc56d2-64e7-4042-8f6b-09b1efcc40a2/deploy-status)](https://app.netlify.com/sites/next-bank-hol/deploys)
 
