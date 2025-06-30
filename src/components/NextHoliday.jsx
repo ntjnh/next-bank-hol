@@ -1,4 +1,4 @@
-export default function BankHol(props) {
+export default function NextHoliday(props) {
     const countryLowerC = props['country'].toLowerCase().replace(/\s/g, '-')
 
     return (

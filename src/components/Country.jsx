@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import BankHol from './BankHol'
+import NextHoliday from './NextHoliday'
 import groupByYear from '../functions/groupByYear'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
@@ -9,7 +9,7 @@ import Tabs from './Tabs'
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
-    const [bankHolidays, setBankHolidays] = useState({})
+    const [bankHolidays, setNextHolidayidays] = useState({})
     const [selectedCountry, setSelectedCountry] = useState({
         full: 'England and Wales',
         upcoming: []
@@ -21,7 +21,7 @@ function Country() {
         fetch('https://www.gov.uk/bank-holidays.json')
             .then(res => res.json())
             .then(data => {
-                setBankHolidays({
+                setNextHolidayidays({
                     'england-and-wales': data['england-and-wales'],
                     'scotland': data['scotland'],
                     'northern-ireland': data['northern-ireland']
@@ -51,9 +51,7 @@ function Country() {
                 setSelectedCountry={setSelectedCountry}
             />
 
-            {/* Pass next holiday data to the BankHol component to be displayed in DOM */}
-            {/* TODO: Rename this component */}
-            <BankHol 
+            <NextHoliday 
                 country={selectedCountry.full} 
                 bankHolDate={selectedCountry.date} 
                 bankHolName={selectedCountry.name} 
