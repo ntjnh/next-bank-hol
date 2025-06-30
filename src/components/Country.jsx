@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import BankHol from './BankHol'
-import getHolidays from '../functions/ getHolidays'
 import groupByYear from '../functions/groupByYear'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
 import List from './List'
+import Tabs from './Tabs'
 
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
@@ -41,57 +41,15 @@ function Country() {
             })
     }, [])
 
-    // TODO: Add to Tabs component
-    const allTabClasses = 'tab'
-    const activeTabClasses = `${allTabClasses} tab--active`
-    const genericTabClasses = `${allTabClasses} tab--generic`
-
-    // TODO: Add to Tabs component
-    // Update data each time a tab is clicked depending on which country is active
-    function handleClick(country) {
-        setActiveTab(country)
-        getHolidays(bankHolidays, country, setSelectedCountry)
-    }
-
-    // TODO: Add to Tabs component
-    // Full country names for display on front end
-    const countryNames = countries.map((countryName, i) => {
-        let countryNameLowerC = countryName.toLowerCase().replace(/\s/g, '-')
-
-        return (
-            <li 
-                key={i} 
-                className="w-1/3" 
-                data-country={countryName} 
-                role="presentation">
-                <button 
-                    onClick={() => handleClick(countryName)} 
-                    className={activeTab === countryName ? 
-                        activeTabClasses : 
-                        genericTabClasses
-                    }
-                    id={`tab-${countryNameLowerC}`} 
-                    role="tab" 
-                    aria-setsize="3" 
-                    aria-posinset={i+1} 
-                    tabIndex={activeTab === countryName ? `0` : `-1`} 
-                    aria-controls={countryNameLowerC} 
-                    aria-selected={activeTab === countryName ? `true` : `false`}
-                >
-                    {countryName}
-                </button>
-            </li>
-        )
-    })
-
     return (
         <article className="max-w-full">
-            <ul 
-                className="tab-list" 
-                role="tablist"
-            >
-                {countryNames}
-            </ul>
+            <Tabs
+                activeTab={activeTab}
+                bankHolidays={bankHolidays}
+                countries={countries}
+                setActiveTab={setActiveTab}
+                setSelectedCountry={setSelectedCountry}
+            />
 
             {/* Pass next holiday data to the BankHol component to be displayed in DOM */}
             {/* TODO: Rename this component */}
