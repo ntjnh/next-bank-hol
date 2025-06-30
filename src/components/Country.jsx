@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import BankHol from './BankHol'
+import getHolidays from '../functions/ getHolidays'
 import groupByYear from '../functions/groupByYear'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
@@ -8,7 +9,7 @@ import List from './List'
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
-    const [bankHols, setBankHols] = useState({})
+    const [bankHolidays, setBankHolidays] = useState({})
     const [selectedCountry, setSelectedCountry] = useState({
         full: 'England and Wales',
         upcoming: []
@@ -20,7 +21,7 @@ function Country() {
         fetch('https://www.gov.uk/bank-holidays.json')
             .then(res => res.json())
             .then(data => {
-                setBankHols({
+                setBankHolidays({
                     'england-and-wales': data['england-and-wales'],
                     'scotland': data['scotland'],
                     'northern-ireland': data['northern-ireland']
@@ -40,37 +41,19 @@ function Country() {
             })
     }, [])
 
-    function getNextBankHol(country) {
-        const currentCountry = country.toLowerCase().replace(/\s/g, '-')
+    // TODO: Add to Tabs component
+    const allTabClasses = 'tab'
+    const activeTabClasses = `${allTabClasses} tab--active`
+    const genericTabClasses = `${allTabClasses} tab--generic`
 
-        // Get dates for the country and filter them
-        const allDates = bankHols[currentCountry].events
-        const nextBankHol = filterEvents(allDates, 'next')
-        const upcomingDates = groupByYear(filterEvents(allDates, 'upcoming'))
-
-        // Get next holiday date
-        const nextBankHolDate = nextBankHol.date
-
-        // Update state with next holiday data for current country
-        setSelectedCountry({
-            full: country,
-            name: nextBankHol.title,
-            date: `${nextBankHolDate.getDate()} ${monthToString(nextBankHolDate)}`,
-            upcoming: upcomingDates,
-            activeDefault: false
-        })
-    }
-
-    const allTabClasses = 'inline-flex items-center justify-center w-full h-14 gap-2 px-4 -mb-px text-gray-400 text-sm font-medium tracking-wide transition duration-300 focus-visible:outline-none disabled:cursor-not-allowed'
-    const activeTabClasses = `${allTabClasses} bg-sky-700 focus:bg-sky-700 text-white focus:text-white stroke-sky-500 hover:stroke-sky-700 focus:stroke-sky-700`
-    const genericTabClasses = `${allTabClasses} justify-self-center text-gray-600 stroke-slate-700 hover:stroke-sky-600`
-
+    // TODO: Add to Tabs component
     // Update data each time a tab is clicked depending on which country is active
     function handleClick(country) {
         setActiveTab(country)
-        getNextBankHol(country)
+        getHolidays(bankHolidays, country, setSelectedCountry)
     }
 
+    // TODO: Add to Tabs component
     // Full country names for display on front end
     const countryNames = countries.map((countryName, i) => {
         let countryNameLowerC = countryName.toLowerCase().replace(/\s/g, '-')
@@ -83,7 +66,10 @@ function Country() {
                 role="presentation">
                 <button 
                     onClick={() => handleClick(countryName)} 
-                    className={activeTab === countryName ? activeTabClasses : genericTabClasses} 
+                    className={activeTab === countryName ? 
+                        activeTabClasses : 
+                        genericTabClasses
+                    }
                     id={`tab-${countryNameLowerC}`} 
                     role="tab" 
                     aria-setsize="3" 
@@ -101,13 +87,14 @@ function Country() {
     return (
         <article className="max-w-full">
             <ul 
-                className="flex items-center border-b border-sky-700 max-w-screen-sm mb-8 mx-auto" 
+                className="tab-list" 
                 role="tablist"
             >
                 {countryNames}
             </ul>
 
             {/* Pass next holiday data to the BankHol component to be displayed in DOM */}
+            {/* TODO: Rename this component */}
             <BankHol 
                 country={selectedCountry.full} 
                 bankHolDate={selectedCountry.date} 
