@@ -1,8 +1,8 @@
-export default function filterEvents(eventsArr, when) {
+export default function filterEvents(events, when) {
     let result
     const today = new Date()
 
-    const holidays = eventsArr.map(hol => {
+    const holidays = events.map(hol => {
         hol.date = new Date(hol.date)
         return hol
     })
