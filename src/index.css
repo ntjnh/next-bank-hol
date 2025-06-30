@@ -3,3 +3,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .tab-list {
+        @apply flex items-center border-b border-sky-700 max-w-screen-sm mb-8 mx-auto;
+    }
+
+    .tab {
+        @apply inline-flex items-center justify-center w-full h-14 gap-2 px-4 -mb-px text-gray-400 text-sm font-medium tracking-wide transition duration-300 focus-visible:outline-none disabled:cursor-not-allowed;
+    }
+
+    .tab--active {
+        @apply bg-sky-700 focus:bg-sky-700 text-white focus:text-white stroke-sky-500 hover:stroke-sky-700 focus:stroke-sky-700;
+    }
+
+    .tab--generic {
+        @apply justify-self-center text-gray-600 stroke-slate-700 hover:stroke-sky-600;
+    }
+
+    .next-hol {
+        @apply bg-sky-700 border border-zinc-700/40 max-w-screen-sm mx-auto p-5 text-center text-zinc-100;
+
+        h2 {
+            @apply font-medium mb-4 text-lg;
+        }
+
+        h3 {
+            @apply font-semibold mb-4 text-3xl;
+        }
+
+        h4 {
+            @apply font-medium text-lg;
+        }
+    }
+
+    .upcoming {
+        @apply max-w-screen-sm mx-auto px-5 md:px-0 py-7;
+
+        .upcoming__heading {
+            @apply font-bold mb-5 text-xl;
+        }
+    }
+
+    .table {
+        @apply mb-9 w-full;
+
+        .table__caption, th, td {
+            @apply text-left;
+        }
+
+        .table__header, .table__cell {
+            @apply border-b border-t border-zinc-500;
+        }
+
+        th, td {
+            @apply leading-5 pr-5 py-2.5;
+        }
+
+        .table__header {
+            @apply min-w-32;
+        }
+
+        .table__caption {
+            @apply font-bold mb-4 text-lg;
+        }
+    }
+}
