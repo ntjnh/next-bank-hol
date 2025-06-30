@@ -3,7 +3,7 @@ import NextHoliday from './NextHoliday'
 import groupByYear from '../functions/groupByYear'
 import filterEvents from '../functions/filterEvents'
 import monthToString from '../functions/monthToString'
-import List from './List'
+import Upcoming from './Upcoming'
 import Tabs from './Tabs'
 
 function Country() {
@@ -57,7 +57,7 @@ function Country() {
                 bankHolName={selectedCountry.name} 
             />
 
-            <List
+            <Upcoming
                 country={selectedCountry.full}
                 dates={selectedCountry.upcoming}
             />

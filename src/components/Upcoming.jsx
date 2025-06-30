@@ -1,6 +1,6 @@
 import Table from './Table'
 
-export default function List({ country, dates }) {
+export default function Upcoming({ country, dates }) {
     return (
         <div className="upcoming">
             <h2 className="upcoming__heading">
