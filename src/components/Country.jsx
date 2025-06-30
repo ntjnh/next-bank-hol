@@ -9,7 +9,7 @@ import Tabs from './Tabs'
 function Country() {
     const countries = ['England and Wales', 'Scotland', 'Northern Ireland']
 
-    const [bankHolidays, setNextHolidayidays] = useState({})
+    const [bankHolidays, setBankHolidays] = useState({})
     const [selectedCountry, setSelectedCountry] = useState({
         full: 'England and Wales',
         upcoming: []
@@ -21,7 +21,7 @@ function Country() {
         fetch('https://www.gov.uk/bank-holidays.json')
             .then(res => res.json())
             .then(data => {
-                setNextHolidayidays({
+                setBankHolidays({
                     'england-and-wales': data['england-and-wales'],
                     'scotland': data['scotland'],
                     'northern-ireland': data['northern-ireland']
