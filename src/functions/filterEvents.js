@@ -1,4 +1,3 @@
-// Function to filter out past bank holidays
 export default function filterEvents(eventsArr, when) {
     let result
     const today = new Date()

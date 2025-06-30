@@ -1,4 +1,3 @@
-// Convert zero-based version of month to text string
 export default function monthToString(date) {
     return [
         'January', 

@@ -16,7 +16,6 @@ function Country() {
     })
     const [activeTab, setActiveTab] = useState(countries[0])
     
-    // Grab dates from API
     useEffect(() => {
         fetch('https://www.gov.uk/bank-holidays.json')
             .then(res => res.json())
@@ -30,7 +29,6 @@ function Country() {
                 const engWalesNextEvent = filterEvents(data['england-and-wales'].events, 'next')
                 const engWalesNextEventDate = engWalesNextEvent.date
             
-                // Create state for the current country and set England and Wales as the default
                 setSelectedCountry({
                     ...selectedCountry,
                     name: engWalesNextEvent.title,
